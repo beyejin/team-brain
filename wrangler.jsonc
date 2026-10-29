@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "team-brain",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "ai": {
+    "binding": "AI"
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "BRAIN", "class_name": "TeamBrain" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["TeamBrain"] }],
+  "triggers": {
+    "crons": ["*/10 * * * *"]
+  },
+  "rules": [{ "type": "Text", "globs": ["**/*.md"], "fallthrough": true }],
+  "vars": {
+    "NOTES_REPO_URL": "https://github.com/beyejin/team-brain"
+  }
+}
