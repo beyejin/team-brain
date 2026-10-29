@@ -1,0 +1,54 @@
+name: Notion 회의록 가져오기
+
+on:
+  schedule:
+    - cron: '7,17,27,37,47,57 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: notion-meetings
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: integrations/slack
+      - name: 가져오기 로직 검사
+        run: |
+          npm test
+          node --test integrations/notion/test/*.test.mjs
+      - name: Notion 회의록 읽기
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: node integrations/notion/import.mjs
+      - name: 변경 내용 검증과 저장
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- meetings/ integrations/notion/state.json
+          if git diff --cached --quiet; then
+            echo '회의록 변경 없음'
+            exit 0
+          fi
+          npm run check:yaml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'docs: 노션 회의록 자동 반영'
+          npm --prefix integrations/slack test
+          git push origin HEAD:main

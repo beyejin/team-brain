@@ -1,0 +1,26 @@
+{
+  "name": "team-brain-slack",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-10-23",
+  "workers_dev": true,
+  "preview_urls": false,
+  "triggers": { "crons": ["*/10 * * * *"] },
+  "ai": { "binding": "AI" },
+  "vars": {
+    "SLACK_TEAM_ID": "",
+    "SLACK_CHANNEL_ID": "",
+    "SLACK_MEETING_CHANNEL_ID": "",
+    "SLACK_MEETING_START_DATE": "",
+    "NOTION_DATA_SOURCE_ID": ""
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "EVENT_JOBS", "class_name": "EventJob" },
+      { "name": "MEETING_SHARES", "class_name": "MeetingShareJob" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["EventJob"] },
+    { "tag": "v2", "new_sqlite_classes": ["MeetingShareJob"] }
+  ]
+}

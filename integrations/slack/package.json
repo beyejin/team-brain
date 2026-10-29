@@ -1,0 +1,15 @@
+{
+  "name": "team-brain-slack",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-brain.mjs",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "check:ai": "npm run build && node scripts/check-ai.mjs",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.149.0"
+  }
+}

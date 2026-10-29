@@ -1,22 +1,14 @@
 {
   "name": "team-brain",
-  "version": "0.1.0",
   "private": true,
-  "type": "module",
-  "engines": {
-    "node": ">=22"
-  },
   "scripts": {
-    "dev": "wrangler dev --port 8787",
-    "test": "node --experimental-strip-types --test test/*.test.ts",
-    "check": "tsc --noEmit",
-    "deploy": "wrangler deploy",
-    "deploy:check": "wrangler deploy --dry-run"
+    "check:yaml": "node scripts/check-frontmatter.mjs",
+    "test": "node --test tests/check-frontmatter.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20261023.1",
-    "@types/node": "^22.19.0",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.42.0"
+    "yaml": "2.9.1"
   }
 }
