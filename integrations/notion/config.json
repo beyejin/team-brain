@@ -1,0 +1,9 @@
+{
+  "dataSourceId": "YOUR_NOTION_DATA_SOURCE_ID",
+  "databaseId": "YOUR_NOTION_DATABASE_ID",
+  "categoryProperty": "카테고리",
+  "categoryValue": "팀일정",
+  "requireMeetingNotes": true,
+  "apiVersion": "2026-03-11",
+  "existingPages": {}
+}

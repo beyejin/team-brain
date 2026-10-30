@@ -1,0 +1,18 @@
+{
+  "display_information": {
+    "name": "2차 팀 브레인",
+    "description": "팀 회의록의 날짜와 근거를 붙여 답하는 질문 봇",
+    "background_color": "#283f42"
+  },
+  "features": {
+    "bot_user": { "display_name": "team-brain", "always_online": false }
+  },
+  "oauth_config": {
+    "scopes": { "bot": ["chat:write", "app_mentions:read"] }
+  },
+  "settings": {
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": false,
+    "token_rotation_enabled": false
+  }
+}

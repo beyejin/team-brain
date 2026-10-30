@@ -1,0 +1,14 @@
+{
+  "name": "team-brain",
+  "private": true,
+  "scripts": {
+    "check:yaml": "node scripts/check-frontmatter.mjs",
+    "test": "node --test tests/check-frontmatter.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "yaml": "2.9.1"
+  }
+}
